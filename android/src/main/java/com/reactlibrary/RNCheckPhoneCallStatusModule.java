@@ -1,6 +1,8 @@
 
 package com.reactlibrary;
 
+import android.content.Context;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -18,5 +20,17 @@ public class RNCheckPhoneCallStatusModule extends ReactContextBaseJavaModule {
   @Override
   public String getName() {
     return "RNCheckPhoneCallStatus";
+  }
+
+  @Override
+  public String get() {
+    TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    String currentPhoneState = manager.getCallState();
+    Log.d("===========currentPhoneState===========", currentPhoneState);
+    if (currentPhoneState == CALL_STATE_OFFHOOK) {
+      return 'PHONE_ON';
+    } else {
+      return 'PHONE_OFF';
+    }
   }
 }
