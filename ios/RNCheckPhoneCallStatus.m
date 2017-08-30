@@ -10,21 +10,29 @@ RCT_EXPORT_MODULE()
 // {
 //     return dispatch_get_main_queue();
 // }
-// RCT_EXPORT_METHOD(get)
-// {
-//   float volume = [AVAudioSession sharedInstance].outputVolume;
-//   RCTLogInfo(@"The system volume level is %f", volume);
-// }
-
-RCT_EXPORT_METHOD(isOnCall)
+RCT_EXPORT_METHOD(get)
 {
   CTCallCenter *callCenter = [[[CTCallCenter alloc] init] autorelease];
+  NSString *phoneStatus = @"not on a call yo";
   for (CTCall *call in callCenter.currentCalls)  {
       if (call.callState == CTCallStateConnected) {
-          RCTLogInfo(@"++++++++===============IS ON A CALL");
+        phoneStatus = @"Im on da phoneeeee";
       }
   }
-  RCTLogInfo(@"++++++++===============NOT ON A CALL");
+  RCTLogInfo(@"ON A CALL %@\n", phoneStatus);
+  // float volume = [AVAudioSession sharedInstance].outputVolume;
+  // RCTLogInfo(@"The system volume level is %f", volume);
 }
+
+// RCT_EXPORT_METHOD(isOnCall)
+// {
+//   CTCallCenter *callCenter = [[[CTCallCenter alloc] init] autorelease];
+//   for (CTCall *call in callCenter.currentCalls)  {
+//       if (call.callState == CTCallStateConnected) {
+//           RCTLogInfo(@"++++++++===============IS ON A CALL");
+//       }
+//   }
+//   RCTLogInfo(@"++++++++===============NOT ON A CALL");
+// }
 
 @end
