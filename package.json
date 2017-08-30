@@ -12,6 +12,7 @@
   "author": "Tori Huang",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.45.0"
+    "react-native": "^0.45.0",
+    "react": "^react@16.0.0-alpha.12"
   }
 }
