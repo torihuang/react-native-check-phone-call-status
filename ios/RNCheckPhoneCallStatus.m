@@ -10,10 +10,21 @@ RCT_EXPORT_MODULE()
 // {
 //     return dispatch_get_main_queue();
 // }
-RCT_EXPORT_METHOD(get)
+// RCT_EXPORT_METHOD(get)
+// {
+//   float volume = [AVAudioSession sharedInstance].outputVolume;
+//   RCTLogInfo(@"The system volume level is %f", volume);
+// }
+
+RCT_EXPORT_METHOD(isOnCall)
 {
-  float volume = [AVAudioSession sharedInstance].outputVolume;
-  RCTLogInfo(@"The system volume level is %f", volume);
+  CTCallCenter *callCenter = [[[CTCallCenter alloc] init] autorelease];
+  for (CTCall *call in callCenter.currentCalls)  {
+      if (call.callState == CTCallStateConnected) {
+          RCTLogInfo(@"++++++++===============IS ON A CALL");
+      }
+  }
+  RCTLogInfo(@"++++++++===============NOT ON A CALL");
 }
 
 @end
