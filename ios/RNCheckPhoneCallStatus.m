@@ -2,6 +2,8 @@
 #import "RNCheckPhoneCallStatus.h"
 #import "React/RCTLog.h"
 #import <AVFoundation/AVAudioSession.h>
+#import<CoreTelephony/CTCallCenter.h>
+#import<CoreTelephony/CTCallStateConnected.h>
 
 @implementation RNCheckPhoneCallStatus
 
@@ -12,16 +14,20 @@ RCT_EXPORT_MODULE()
 // }
 RCT_EXPORT_METHOD(get)
 {
-  CTCallCenter *callCenter = [[[CTCallCenter alloc] init] autorelease];
   NSString *phoneStatus = @"not on a call yo";
-  for (CTCall *call in callCenter.currentCalls)  {
-      if (call.callState == CTCallStateConnected) {
+  CTCallCenter *ctCallCenter = [[CTCallCenter alloc] init];
+  if (ctCallCenter.currentCalls != nil)
+  {
+    NSArray* currentCalls = [ctCallCenter.currentCalls allObjects];
+    for (CTCall *call in currentCalls)
+    {
+      if(call.callState == CTCallStateConnected)
+      {
         phoneStatus = @"Im on da phoneeeee";
       }
+    }
   }
   RCTLogInfo(@"ON A CALL %@\n", phoneStatus);
-  // float volume = [AVAudioSession sharedInstance].outputVolume;
-  // RCTLogInfo(@"The system volume level is %f", volume);
 }
 
 // RCT_EXPORT_METHOD(isOnCall)
