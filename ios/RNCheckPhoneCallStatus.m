@@ -24,10 +24,13 @@ RCT_EXPORT_METHOD(get)
       if(call.callState == CTCallStateConnected)
       {
         phoneStatus = @"Im on da phoneeeee";
+        RCTLogInfo(@"ON A CALL %@\n", phoneStatus);
+        return TRUE
       }
     }
   }
   RCTLogInfo(@"ON A CALL %@\n", phoneStatus);
+  return FALSE
 }
 
 // RCT_EXPORT_METHOD(isOnCall)
