@@ -9,8 +9,9 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(get)
+RCT_EXPORT_METHOD(get:(RCTResponseSenderBlock)callback)
 {
+    NSString *phoneStatus = "PHONE_OFF";
     CTCallCenter *ctCallCenter = [[CTCallCenter alloc] init];
     if (ctCallCenter.currentCalls != nil)
     {
@@ -19,11 +20,11 @@ RCT_EXPORT_METHOD(get)
         {
             if(call.callState == CTCallStateConnected)
             {
-                return @"PHONE_ON";
+                phoneStatus = @"PHONE_ON";
             }
         }
     }
-    return @"PHONE_OFF";
+    callback(@[[NSNull null], phoneStatus]);
 }
 
 @end
