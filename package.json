@@ -9,6 +9,10 @@
   "keywords": [
     "react-native"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/torihuang/react-native-check-phone-call-status"
+  },
   "author": "Tori Huang",
   "license": "MIT",
   "peerDependencies": {
